@@ -1,0 +1,53 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<wsdl:definitions name="InfoTravauxFTTH"
+                  targetNamespace="http://interop-fibre.fr/wsdl/ftth/infoTravaux/v1-0"
+                  xmlns:tns="http://interop-fibre.fr/wsdl/ftth/infoTravaux/v1-0"
+                  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+                  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+                  xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+
+    <wsdl:types>
+        <xsd:schema>
+            <xsd:import namespace="http://interop-fibre.fr/wsdl/ftth/infoTravaux/v1-0" schemaLocation="infoTravauxFTTH.xsd"/>
+        </xsd:schema>
+    </wsdl:types>
+
+    <wsdl:message name="getInfoTravauxFTTHRequest">
+        <wsdl:part name="getInfoTravauxFTTHRequest" element="tns:getInfoTravauxFTTHRequest" />
+    </wsdl:message>
+
+    <wsdl:message name="getInfoTravauxFTTHResponse">
+        <wsdl:part name="getInfoTravauxFTTHResponse" element="tns:getInfoTravauxFTTHResponse" />
+    </wsdl:message>
+
+    <wsdl:message name="InfoTravauxFTTHHeader">
+        <wsdl:part name="header" element="tns:InfoTravauxFTTHHeader" />
+    </wsdl:message>
+
+    <wsdl:portType name="getInfoTravauxFTTHService">
+        <wsdl:operation name="getInfoTravauxFTTH">
+            <wsdl:input message="tns:getInfoTravauxFTTHRequest"/>
+            <wsdl:output message="tns:getInfoTravauxFTTHResponse"/>
+        </wsdl:operation>
+    </wsdl:portType>
+
+    <wsdl:binding name="getInfoTravauxFTTHPortBinding" type="tns:getInfoTravauxFTTHService">
+        <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+        <wsdl:operation name="getInfoTravauxFTTH">
+            <soap:operation soapAction="getInfoTravauxFTTH"/>
+            <wsdl:input>
+                <soap:header message="tns:InfoTravauxFTTHHeader" use="literal" part="header"/>
+                <soap:body part="getInfoTravauxFTTHRequest" use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body part="getInfoTravauxFTTHResponse" use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+
+    <wsdl:service name="getInfoTravauxFTTHService">
+        <wsdl:port name="getInfoTravauxFTTHPort" binding="tns:getInfoTravauxFTTHPortBinding">
+            <soap:address location="http://localhost/ftth/services/infoTravauxService"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>
