@@ -119,8 +119,8 @@
             </xsd:complexType>
             <xsd:complexType name="typePeriode">
                 <xsd:sequence>
-                    <xsd:element name="dateDebutRecherche" type="xsd:dateTime" minOccurs="0"/>
-                    <xsd:element name="dateFinRecherche" type="xsd:dateTime" minOccurs="0"/>
+                    <xsd:element name="dateDebutRecherche" type="xsd:dateTime"/>
+                    <xsd:element name="dateFinRecherche" type="xsd:dateTime"/>
                 </xsd:sequence>
             </xsd:complexType>
             <xsd:simpleType name="typeBooleen">
