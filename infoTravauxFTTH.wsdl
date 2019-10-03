@@ -24,7 +24,7 @@
 
             <xsd:complexType name="getInfoTravauxFTTHInput">
                 <xsd:sequence>
-                    <xsd:element name="referenceTPDERCO" type="tns:typeReference" minOccurs="0"/>
+                    <xsd:element name="referenceTPDERCO" type="xsd:string" minOccurs="0"/>
                     <xsd:element name="type" type="tns:typeCategorie" minOccurs="0"/>
                     <xsd:element name="referencePrestationPm" type="tns:typeReferencePrestationPm" minOccurs="0"/>
                     <xsd:element name="dateCreation" type="tns:typePeriode" minOccurs="0"/>
@@ -74,7 +74,7 @@
                     <xsd:element name="referenceIncident" type="xsd:string" minOccurs="0"/>
                     <xsd:element name="commentaireInterventionOC" type="tns:typeCommentaire" minOccurs="0"/>
                 </xsd:sequence>
-                <xsd:attribute name="reference" type="tns:typeReference"  use="required"/>
+                <xsd:attribute name="reference" type="xsd:string"  use="required"/>
                 <xsd:attribute name="serviceProviderID" type="xsd:string" use="required"/>
             </xsd:complexType>
             <xsd:complexType name="typeListeTravaux">
@@ -160,11 +160,6 @@
             <xsd:simpleType name="typeCommentaire">
                 <xsd:restriction base="xsd:string">
                     <xsd:maxLength value="512"/>
-                </xsd:restriction>
-            </xsd:simpleType>
-            <xsd:simpleType name="typeReference">
-                <xsd:restriction base="xsd:string">
-                    <xsd:pattern value="([0-9][a-z][A-Z]_-)+"/>
                 </xsd:restriction>
             </xsd:simpleType>
             <xsd:simpleType name="typeCategorie">
