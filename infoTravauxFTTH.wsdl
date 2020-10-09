@@ -7,8 +7,167 @@
                   xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
 
     <wsdl:types>
-        <xsd:schema>
-            <xsd:import namespace="http://interop-fibre.fr/wsdl/ftth/infoTravaux/v1-0" schemaLocation="infoTravauxFTTH.xsd"/>
+        <xsd:schema attributeFormDefault="unqualified" elementFormDefault="unqualified"
+                    targetNamespace="http://interop-fibre.fr/wsdl/ftth/infoTravaux/v1-0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+            <xsd:element name="getInfoTravauxFTTHRequest" type="tns:getInfoTravauxFTTHInput"/>
+            <xsd:element name="getInfoTravauxFTTHResponse" type="tns:getInfoTravauxFTTHOutput"/>
+            <xsd:element name="InfoTravauxFTTHHeader" type="tns:typeHeader"/>
+
+            <xsd:element name="infoFtthError">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="codeRetour" type="xsd:nonNegativeInteger"/>
+                        <xsd:element name="messageRetour" type="xsd:string"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+
+            <xsd:complexType name="getInfoTravauxFTTHInput">
+                <xsd:sequence>
+                    <xsd:element name="referenceTPDERCO" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="type" type="tns:typeCategorie" minOccurs="0"/>
+                    <xsd:element name="referencePrestationPm" type="tns:typeReferencePrestationPm" minOccurs="0"/>
+                    <xsd:element name="dateCreation" type="tns:typePeriode" minOccurs="0"/>
+                    <xsd:element name="dateDebutTravaux" type="tns:typePeriode" minOccurs="0"/>
+                    <xsd:element name="dateFinTravaux" type="tns:typePeriode" minOccurs="0"/>
+                    <xsd:element name="interventionRequiseOC" type="tns:typeBooleen" minOccurs="0"/>
+                    <xsd:element name="etat" type="tns:typeEtat" minOccurs="0"/>
+                    <xsd:element name="referencePriseImpactee" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="referencePrestationPriseImpactee" type="xsd:string" minOccurs="0"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="getInfoTravauxFTTHOutput">
+                <xsd:sequence>
+                    <xsd:element name="listeTravaux" type="tns:typeListeTravaux" minOccurs="0"/>
+                </xsd:sequence>
+            </xsd:complexType>
+
+            <xsd:complexType name="typeHeader">
+                <xsd:sequence>
+                    <xsd:element name="supplierID" type="xsd:string"/>
+                    <xsd:element name="serviceProviderID" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="typeTravaux">
+                <xsd:sequence>
+                    <!-- champs obligatoires -->
+                    <xsd:element name="type" type="tns:typeCategorie"/>
+                    <xsd:element name="equipementConcerne" type="tns:typeEquipementConcerne"/>
+                    <xsd:element name="referencePm" type="xsd:string"/>
+                    <xsd:element name="referencePrestationPm" type="xsd:string"/>
+                    <xsd:element name="dateModification" type="xsd:dateTime"/>
+                    <xsd:element name="interventionRequiseOC" type="tns:typeBooleen"/>
+                    <!-- champs conditionnels -->
+                    <xsd:element name="dateDebutTravaux" type="xsd:dateTime" minOccurs="0"/>
+                    <xsd:element name="dateFinTravaux" type="xsd:dateTime" minOccurs="0"/>
+                    <xsd:element name="travauxCuratifs" type="tns:typeBooleen" minOccurs="0"/>
+                    <xsd:element name="natureIntervention" type="tns:typeNatureIntervention" minOccurs="0"/>
+                    <xsd:element name="etat" type="tns:typeEtat" minOccurs="0"/>
+                    <xsd:element name="referencePBO" type="tns:typeReferencePBO" minOccurs="0"/>
+                    <xsd:element name="referencePmTechnique" type="tns:typeReferencePmTechnique" minOccurs="0"/>
+                    <xsd:element name="commentairesIntervention" type="tns:typeCommentaire" minOccurs="0"/>
+                    <xsd:element name="coordonneesContactOI" type="xsd:string" minOccurs="0"/>
+                    <!-- champs facultatifs -->
+                    <xsd:element name="identifiantImmeuble" type="tns:typeIdentifiantImmeuble" minOccurs="0"/>
+                    <xsd:element name="referencePriseImpactees" type="tns:typeReferencePriseImpactees" minOccurs="0"/>
+                    <xsd:element name="referencePrestationPriseImpactees" type="tns:typeReferencePrestationPriseImpactees" minOccurs="0"/>
+                    <xsd:element name="referenceIncident" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="commentaireInterventionOC" type="tns:typeCommentaire" minOccurs="0"/>
+                </xsd:sequence>
+                <xsd:attribute name="reference" type="xsd:string"  use="required"/>
+                <xsd:attribute name="serviceProviderID" type="xsd:string" use="required"/>
+            </xsd:complexType>
+            <xsd:complexType name="typeListeTravaux">
+                <xsd:sequence>
+                    <xsd:element name="travaux" type="tns:typeTravaux" minOccurs="0" maxOccurs="unbounded"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="typeIdentifiantImmeuble">
+                <xsd:sequence>
+                    <xsd:element name="immeuble" type="xsd:string" maxOccurs="unbounded"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="typeReferencePm">
+                <xsd:sequence>
+                    <xsd:element name="PM" type="xsd:string" maxOccurs="unbounded"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="typeReferencePrestationPm">
+                <xsd:sequence>
+                    <xsd:element name="prestationPm" type="xsd:string" maxOccurs="unbounded"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="typeReferencePriseImpactees">
+                <xsd:sequence>
+                    <xsd:element name="prise" type="xsd:string" maxOccurs="unbounded"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="typeReferencePrestationPriseImpactees">
+                <xsd:sequence>
+                    <xsd:element name="prestation" type="xsd:string" maxOccurs="unbounded"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="typeReferencePBO">
+                <xsd:sequence>
+                    <xsd:element name="PBO" type="xsd:string" maxOccurs="unbounded"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="typeReferencePmTechnique">
+                <xsd:sequence>
+                    <xsd:element name="PMT" type="xsd:string" maxOccurs="unbounded"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="typePeriode">
+                <xsd:sequence>
+                    <xsd:element name="dateDebutRecherche" type="xsd:dateTime"/>
+                    <xsd:element name="dateFinRecherche" type="xsd:dateTime"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:simpleType name="typeBooleen">
+                <xsd:restriction base="xsd:string">
+                    <xsd:enumeration value="OUI"/>
+                    <xsd:enumeration value="NON"/>
+                </xsd:restriction>
+            </xsd:simpleType>
+            <xsd:simpleType name="typeEquipementConcerne">
+                <xsd:restriction base="xsd:string">
+                    <xsd:enumeration value="PM"/>
+                    <xsd:enumeration value="PMT"/>
+                    <xsd:enumeration value="PBO"/>
+                    <xsd:enumeration value="LIENPMPBO"/>
+                </xsd:restriction>
+            </xsd:simpleType>
+            <xsd:simpleType name="typeNatureIntervention">
+                <xsd:restriction base="xsd:string">
+                    <xsd:enumeration value="DEPL"/>
+                    <xsd:enumeration value="REFE"/>
+                    <xsd:enumeration value="DSCM"/>
+                    <xsd:enumeration value="EXTE"/>
+                    <xsd:enumeration value="INGE"/>
+                    <xsd:enumeration value="CHGC"/>
+                    <xsd:enumeration value="AUTR"/>
+                </xsd:restriction>
+            </xsd:simpleType>
+            <xsd:simpleType name="typeEtat">
+                <xsd:restriction base="xsd:string">
+                    <xsd:enumeration value="NOUVEAU"/>
+                    <xsd:enumeration value="REPLANIFICATION"/>
+                    <xsd:enumeration value="MAJ"/>
+                    <xsd:enumeration value="CLOTURE"/>
+                    <xsd:enumeration value="ANNULE"/>
+                </xsd:restriction>
+            </xsd:simpleType>
+            <xsd:simpleType name="typeCommentaire">
+                <xsd:restriction base="xsd:string">
+                    <xsd:maxLength value="512"/>
+                </xsd:restriction>
+            </xsd:simpleType>
+            <xsd:simpleType name="typeCategorie">
+                <xsd:restriction base="xsd:string">
+                    <xsd:enumeration value="TP"/>
+                    <xsd:enumeration value="DERCO"/>
+                </xsd:restriction>
+            </xsd:simpleType>
         </xsd:schema>
     </wsdl:types>
 
@@ -20,14 +179,20 @@
         <wsdl:part name="getInfoTravauxFTTHResponse" element="tns:getInfoTravauxFTTHResponse" />
     </wsdl:message>
 
-    <wsdl:message name="InfoTravauxFTTHHeader">
-        <wsdl:part name="header" element="tns:InfoTravauxFTTHHeader" />
+    <wsdl:message name="infoFtthErrorMessage">
+        <wsdl:part name="fault" element="tns:infoFtthError" />
     </wsdl:message>
+
+    <wsdl:message name="InfoTravauxFTTHHeader">
+        <wsdl:part name="InfoTravauxFTTHHeader" element="InfoTravauxFTTHHeader"/>
+    </wsdl:message>
+
 
     <wsdl:portType name="getInfoTravauxFTTHService">
         <wsdl:operation name="getInfoTravauxFTTH">
-            <wsdl:input message="tns:getInfoTravauxFTTHRequest"/>
-            <wsdl:output message="tns:getInfoTravauxFTTHResponse"/>
+            <wsdl:input message="tns:getInfoTravauxFTTHRequest" name="getInfoTravauxFTTHRequest"/>
+            <wsdl:output message="tns:getInfoTravauxFTTHResponse" name="getInfoTravauxFTTHResponse"/>
+            <wsdl:fault message="tns:infoFtthErrorMessage" name="infoFtthError"/>
         </wsdl:operation>
     </wsdl:portType>
 
@@ -35,13 +200,16 @@
         <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
         <wsdl:operation name="getInfoTravauxFTTH">
             <soap:operation soapAction="getInfoTravauxFTTH"/>
-            <wsdl:input>
-                <soap:header message="tns:InfoTravauxFTTHHeader" use="literal" part="header"/>
-                <soap:body part="getInfoTravauxFTTHRequest" use="literal"/>
+            <wsdl:input name="getInfoTravauxFTTHRequest">
+                <soap:header message="tns:InfoTravauxFTTHHeader" use="literal" part="InfoTravauxFTTHHeader"/>
+                <soap:body use="literal"/>
             </wsdl:input>
-            <wsdl:output>
-                <soap:body part="getInfoTravauxFTTHResponse" use="literal"/>
+            <wsdl:output name="getInfoTravauxFTTHResponse">
+                <soap:body use="literal"/>
             </wsdl:output>
+            <wsdl:fault name="infoFtthError">
+                <soap:fault name="infoFtthError" use="literal"/>
+            </wsdl:fault>
         </wsdl:operation>
     </wsdl:binding>
 
