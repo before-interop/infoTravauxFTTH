@@ -149,6 +149,7 @@
                     <xsd:enumeration value="REC OI ONLY"/>
                     <xsd:enumeration value="REC MODE OC"/>
                     <xsd:enumeration value="REC MODE OI"/>
+                    <xsd:enumeration value="REC CRITIQUE"/>
                     <xsd:enumeration value="AUTR"/>
                 </xsd:restriction>
             </xsd:simpleType>
