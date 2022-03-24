@@ -28,6 +28,7 @@
                     <xsd:element name="type" type="tns:typeCategorie" minOccurs="0"/>
                     <xsd:element name="referencePrestationPm" type="tns:typeReferencePrestationPm" minOccurs="0"/>
                     <xsd:element name="dateCreation" type="tns:typePeriode" minOccurs="0"/>
+                    <xsd:element name="dateModification" type="tns:typePeriode" minOccurs="0"/>
                     <xsd:element name="dateDebutTravaux" type="tns:typePeriode" minOccurs="0"/>
                     <xsd:element name="dateFinTravaux" type="tns:typePeriode" minOccurs="0"/>
                     <xsd:element name="interventionRequiseOC" type="tns:typeBooleen" minOccurs="0"/>
@@ -145,6 +146,10 @@
                     <xsd:enumeration value="EXTE"/>
                     <xsd:enumeration value="INGE"/>
                     <xsd:enumeration value="CHGC"/>
+                    <xsd:enumeration value="REC OI ONLY"/>
+                    <xsd:enumeration value="REC MODE OC"/>
+                    <xsd:enumeration value="REC MODE OI"/>
+                    <xsd:enumeration value="REC CRITIQUE"/>
                     <xsd:enumeration value="AUTR"/>
                 </xsd:restriction>
             </xsd:simpleType>
